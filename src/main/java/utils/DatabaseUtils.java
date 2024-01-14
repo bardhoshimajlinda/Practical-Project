@@ -4,6 +4,7 @@ import entities.BaseEntity;
 import entities.Menu;
 import entities.Order;
 import entities.OrderItem;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -50,5 +51,14 @@ public class DatabaseUtils {
             }
         }
         return FACTORY;
+    }
+
+    public static boolean testConnection() {
+        try (Session session = getFactory().openSession()) {
+            return session.isConnected();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
