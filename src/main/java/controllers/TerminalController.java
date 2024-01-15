@@ -70,10 +70,17 @@ public class TerminalController {
 
                         while(true) {
                             System.out.println("Please insert the quantity:");
-                            int quantity = sc.nextInt();
-                            if (quantity > 0) {
-                                item.setQuantity(quantity);
-                                break;
+                            if (sc.hasNextInt()) {
+                                int quantity = sc.nextInt();
+                                if (quantity > 0) {
+                                    item.setQuantity(quantity);
+                                    break;
+                                } else {
+                                    System.out.println("Quantity must be greater than 0.");
+                                }
+                            } else {
+                                System.out.println("Invalid input. Please enter a valid integer.");
+                                sc.next();
                             }
                         }
                         cart.add(item);
